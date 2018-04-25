@@ -1,0 +1,3 @@
+p #{text}
+- if(link.length)
+	a(href='#{link}') Download mp3

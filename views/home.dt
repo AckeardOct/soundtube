@@ -1,0 +1,34 @@
+doctype html
+html
+	head
+		link(rel="stylesheet", href="#{req.rootDir}styles/common.css")
+		title SoundTube
+	body
+		.clear
+
+		div
+			label(for="link") youtube link:
+			input#you(name="link", type="text")
+			button(onclick="foo(document.getElementById('you').value)") Convert		
+
+		#progress.progress
+			p Add youtube link
+
+		script.
+			function updateInfo() {
+				var req = new XMLHttpRequest(); 
+				req.open('GET', '/inform', false);			
+				req.send();
+				if(req.status == 200) {
+					var elem = document.getElementById('progress');
+					elem.innerHTML = req.responseText;			
+				}
+			}
+			function foo(str) {
+				var req = new XMLHttpRequest(); 
+				req.open('GET', '/start?str='+str, false);			
+				req.send();	
+				setInterval(updateInfo, 1000);
+			}
+
+			
